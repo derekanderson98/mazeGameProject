@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/maze1placeholder.png" type="Texture" id=2]
+[ext_resource path="res://Goal.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 70.75, 10 )
+
+[sub_resource type="QuadMesh" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="maze" type="StaticBody2D" parent="."]
+position = Vector2( -11, -19 )
+
+[node name="Maze1Placeholder" type="Sprite" parent="maze"]
+position = Vector2( 572, 702 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="maze"]
+build_mode = 1
+polygon = PoolVector2Array( 41, 33, 40, 584, 989, 615, 1001, 20, 985, 607, 452, 591, 478, 460, 734, 468, 551, 459, 576, 414, 782, 419, 780, 471, 844, 448, 792, 196, 759, 354, 792, 208, 841, 447, 784, 464, 785, 413, 577, 409, 548, 456, 474, 455, 447, 591, 47, 579 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="maze"]
+build_mode = 1
+polygon = PoolVector2Array( 40, 32, 1001, 24, 856, 29, 917, 522, 539, 533, 916, 521, 851, 29, 328, 33, 325, 132, 756, 130, 709, 205, 446, 181, 434, 291, 636, 296, 425, 295, 439, 174, 704, 200, 751, 135, 326, 138, 325, 366, 589, 360, 220, 376, 225, 505, 370, 425, 221, 513, 214, 440, 116, 461, 214, 433, 212, 374, 152, 375, 319, 367, 321, 33, 155, 36, 155, 221, 147, 37 )
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 82, 63 )
+
+[node name="Goal" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+position = Vector2( 916.75, 21 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Goal"]
+position = Vector2( 916, 21 )
+scale = Vector2( 143.75, 18.75 )
+mesh = SubResource( 2 )
+
+[connection signal="body_entered" from="Goal" to="Goal" method="_on_Goal_body_entered"]

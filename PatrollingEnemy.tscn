@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://PatrollingEnemy.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 69, -2, 0, 0, 0, 0, 0, -2 )
+}
+
+[sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="SphereMesh" id=5]
+
+[node name="PatrollingEnemy" type="Node2D"]
+position = Vector2( 190, 61 )
+script = ExtResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 0, -1 )
+rotation = -0.0144917
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Path2D/PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/KinematicBody2D"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Path2D/PathFollow2D/KinematicBody2D"]
+position = Vector2( 0.0410085, 0.0131909 )
+scale = Vector2( 10.1471, 10.1471 )
+mesh = SubResource( 5 )
